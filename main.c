@@ -1,5 +1,7 @@
 #include "libasm.h"
 #include <stdio.h>
+#include <stdlib.h>
+
 
 int		launch_strlen(char *str)
 {
@@ -35,49 +37,83 @@ void	test_strlen(int *flag)
 	}
 }
 
-// /* TEST FT_STRDUP */
-// int		launch_strdup(char *str)
-// {
-// 	char	*s1;
-// 	char	*s2;
+int		launch_strdup(char *str)
+{
+	char	*s1;
+	char	*s2;
 
-// 	s1 = ft_strdup(str);
-// 	s2 = strdup(str);
+	s1 = ft_strdup(str);
+	s2 = strdup(str);
 
-// 	if (strcmp(s1, s2) == 0)
-// 	{
-// 		free(s1);
-// 		free(s2);
-// 		return (1);
-// 	}
-// 	else
-// 	{
-// 		free(s1);
-// 		free(s2);
-// 		return (0);
-// 	}
-// }
+	if (strcmp(s1, s2) == 0)
+	{
+		free(s1);
+		free(s2);
+		return (1);
+	}
+	else
+	{
+		free(s1);
+		free(s2);
+		return (0);
+	}
+}
 
-// void	test_strdup(int *flag)
-// {
-// 	int		nb;
-// 	char	*tab[] = {"Hello World !", "Coucou", "", "123456789"};
+void	test_strdup(int *flag)
+{
+	int		nb;
+	char	*tab[] = {"Hello World !", "Coucou", "", "123456789"};
 
-// 	printf("\n\033[33m------- Test FT_STRDUP -------\033[00m\n");
-// 	nb = 0;
-// 	while (nb < 4)
-// 	{
-// 		printf("\033[94mTest number %d with \"%s\" :\033[00m ", (nb + 1), tab[nb]);
-// 		if (launch_strdup(tab[nb]) == 1)
-// 			printf("\033[32mOK\033[00m\n");
-// 		else
-// 		{
-// 			(*flag)++;
-// 			printf("\033[31mERROR\033[00m\n");
-// 		}
-// 		nb++;
-// 	}
-// }
+	printf("\n\033[33m------- Test FT_STRDUP -------\033[00m\n");
+	nb = 0;
+	while (nb < 4)
+	{
+		printf("\033[94mTest number %d with \"%s\" :\033[00m ", (nb + 1), tab[nb]);
+		if (launch_strdup(tab[nb]) == 1)
+			printf("\033[32mOK\033[00m\n");
+		else
+		{
+			(*flag)++;
+			printf("\033[31mERROR\033[00m\n");
+		}
+		nb++;
+	}
+}
+
+int		launch_strcpy(char *str)
+{
+	char	s1[100];
+	char	s2[100];
+
+	ft_strcpy(s1, str);
+	strcpy(s2, str);
+
+	if (strcmp(s1, s2) == 0)
+		return (1);
+	else
+		return (0);
+}
+
+void	test_strcpy(int *flag)
+{
+	int		nb;
+	char	*tab[] = {"Hello World !", "Coucou", ""};
+
+	nb = 0;	
+	printf("\n\033[33m------- Test FT_STRCPY -------\033[00m\n");
+	while (nb < 3)
+	{
+		printf("\033[94mTest number %d with \"%s\" :\033[00m ", (nb + 1), tab[nb]);
+		if (launch_strcpy(tab[nb]) == 1)
+			printf("\033[32mOK\033[00m\n");
+		else
+		{
+			(*flag)++;
+			printf("\033[31mERROR\033[00m\n");
+		}
+		nb++;
+	}
+}
 
 void	wait_enter()
 {
@@ -89,7 +125,6 @@ void	wait_enter()
 int		main(int ac, char **av)
 {
 	int		flag;
-
 	flag = 0;
 
 	if (ac == 1)
@@ -98,6 +133,8 @@ int		main(int ac, char **av)
 		test_strlen(&flag);
 		// wait_enter();
 		// test_strdup(&flag);
+		wait_enter();
+		test_strcpy(&flag);
 	}
 	printf("\n\033[33m------- FINISH -------\033[00m\n");
     if (flag == 0)

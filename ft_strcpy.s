@@ -1,3 +1,5 @@
+BITS 64
+
 section .text
     global _ft_strcpy
 
@@ -8,12 +10,14 @@ _ft_strcpy:
     mov     rdx, 0
 
 strcpy_loop:
-    mov     al, byte [rsi + rdx]
-    mov     byte [rdi + rdx], al
+    mov     al, byte[rsi + rdx]
+    mov     byte[rdi + rdx], al
     inc     rdx
     cmp     al, 0
-    jne     strcpy_loop
+    jne     strcpy_loop ; jne = tand pas egal 0
+    jz      strcpy_end  ; jz = si zero
 
+strcpy_end:
     mov     rax, rdi
     mov     rsp, rbp
     pop     rdx
