@@ -5,14 +5,13 @@ section .text
 
 _ft_strcpy:
     push    rbp
-    push    rdx
     mov     rbp, rsp
-    mov     rdx, 0
+    mov     rcx, 0
 
 strcpy_loop:
-    mov     al, byte[rsi + rdx]
-    mov     byte[rdi + rdx], al
-    inc     rdx
+    mov     al, byte[rsi + rcx]
+    mov     byte[rdi + rcx], al
+    inc     rcx
     cmp     al, 0
     jne     strcpy_loop ; jne = tand pas egal 0
     jz      strcpy_end  ; jz = si zero
@@ -20,6 +19,5 @@ strcpy_loop:
 strcpy_end:
     mov     rax, rdi
     mov     rsp, rbp
-    pop     rdx
     pop     rbp
     ret
